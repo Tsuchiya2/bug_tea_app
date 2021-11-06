@@ -71,14 +71,13 @@ class UsersTest < ApplicationSystemTestCase
     assert_text User.last.email
   end
 
-  test 'success delete user' do
+  test 'success delete user by show' do
     login_admin
     click_on 'ユーザー一覧'
     click_on 'partner'
     click_on '削除'
     assert_text 'ユーザー「partner」を削除しました。'
   end
-
 
   private
 

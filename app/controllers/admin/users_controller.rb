@@ -23,7 +23,7 @@ class Admin::UsersController < ApplicationController
     if @user.save
       redirect_to admin_user_url(@user), notice: "ユーザー「#{@user.name}」を登録しました。"
     else
-      render :new
+      redirect_to new_admin_user_url
     end
   end
 
