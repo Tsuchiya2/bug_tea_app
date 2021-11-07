@@ -1,24 +1,45 @@
-# README
+# 概要
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+後述のテスト実行コマンドがエラーにならないように修正をお願いします。
 
-Things you may want to cover:
+## 環境構築
 
-* Ruby version
+```Bash
+・ git clone git@github.com:Tsuchiya2/bug_tea_app.git
+・ cd bug_tea_app
+・ git remote rm origin
+・ git checkout -b fix_○○_xxxx
+・ rbenv local 2.5.1
+・ bundle install
+・ bin/rails db:migrate
+・ bin/rails db:seed
+・ bin/rails s
+```
 
-* System dependencies
+＊SSHではなく、HTTPSの場合は `git clone https://github.com/Tsuchiya2/bug_tea_app.git` になります。
 
-* Configuration
+〇〇のところには`期`を、xxxxのところには`名前`を入力してください。
 
-* Database creation
+***
 
-* Database initialization
+## ログイン
 
-* How to run the test suite
+【admin権限を持つユーザーでログイン】
 
-* Services (job queues, cache servers, search engines, etc.)
+- メールアドレス：admin@example.com
+- パスワード：password
 
-* Deployment instructions
+【一般ユーザーでログイン】
 
-* ...
+- メールアドレス：user@example.com
+- パスワード：password
+
+***
+
+## テスト実行
+
+```Bash
+ rails test:system
+```
+
+※ ローカルでMiniTestのテストコードが成功する様な修正が確認できれば完了となります。修正したコードのcommitやpushは不要です。
