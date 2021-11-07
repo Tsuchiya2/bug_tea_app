@@ -11,7 +11,7 @@ class Task < ApplicationRecord
   private
 
   def set_nameless_name
-    self.name = '名前なし' if name.blank?
+    self.name = '名前なし' unless name.blank?
   end
 
   def validate_name_not_including_comma

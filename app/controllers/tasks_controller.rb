@@ -23,6 +23,7 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @task = Task.first
   end
 
   def update
