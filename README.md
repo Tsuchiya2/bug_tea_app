@@ -28,11 +28,13 @@
 
 - メールアドレス：admin@example.com
 - パスワード：password
+- admin権限：true
 
 【一般ユーザーでログイン】
 
 - メールアドレス：user@example.com
 - パスワード：password
+- admin権限：false
 
 ***
 
@@ -43,3 +45,9 @@
 ```
 
 ※ ローカルでMiniTestのテストコードが成功する様な修正が確認できれば完了となります。修正したコードのcommitやpushは不要です。
+
+***
+
+## ヒント
+
+`test/system/users_test.rb`, `test/system/tasks_test.rb`の中身を見て、どんなことを機械にさせようとしているのかを読み取り、実際にブラウザで同じ操作を行ってみましょう。

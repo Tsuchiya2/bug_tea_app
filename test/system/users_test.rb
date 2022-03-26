@@ -4,10 +4,9 @@ class UsersTest < ApplicationSystemTestCase
   driven_by :selenium, using: :headless_chrome
 
   def setup
-    if User.find_by(email: 'admin@example.com').nil?
-      User.create(name: 'admin', email: 'admin@example.com', password: 'password', password_confirmation: 'password', admin: true)
-      User.create(name: 'partner', email: 'partner@example.com', password: 'password', password_confirmation: 'password', admin: false)
-    end
+    # 各テスト項目が実行される前に事前に行われる処理が記載されています。
+    User.create(name: 'admin', email: 'admin@example.com', password: 'password', password_confirmation: 'password', admin: true)
+    User.create(name: 'partner', email: 'partner@example.com', password: 'password', password_confirmation: 'password', admin: false)
   end
 
   test 'login success with exist admin' do
@@ -29,7 +28,7 @@ class UsersTest < ApplicationSystemTestCase
   end
 
   test 'success create new user' do
-    login_admin
+    login_admin   # ← private以下にある'login_admin'メソッドを呼び出しています。以降のテスト項目でも同様です。
     click_on 'ユーザー一覧'
     click_on '新規登録'
     fill_in '名前', with: 'user'
@@ -41,10 +40,12 @@ class UsersTest < ApplicationSystemTestCase
   end
 
   test 'failure create by name blank' do
+    # admin@example.comでログインして、新規ユーザーを「名前をnil (空欄)」で登録しようとすると、
+    # 検証が機能して新規ユーザー登録が失敗し、画面に「名前を入力してください」と表示されるかをテストします。
     login_admin
     click_on 'ユーザー一覧'
     click_on '新規登録'
-    fill_in '名前', with: nil
+    fill_in '名前', with: ''
     fill_in 'メールアドレス', with: 'tester@example.com'
     fill_in 'パスワード', with: 'password'
     fill_in 'パスワード(確認)', with: 'password'
@@ -72,6 +73,8 @@ class UsersTest < ApplicationSystemTestCase
   end
 
   test 'success delete user by show' do
+    # admin@example.comでログインして、ユーザー一覧から'partner'(名前)をクリックしてユーザーの詳細画面に遷移後、
+    # '削除'をクリックすると、画面に「ユーザー「partner」を削除しました。」と表示されるかをテストします。
     login_admin
     click_on 'ユーザー一覧'
     click_on 'partner'
